@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pridi:wght@200&display=swap" rel="stylesheet">
+
+    <style>
+        h1 {
+            text-align: center;
+            margin: 20px;
+            margin-top: 10%;
+            color: #EDF2F4;
+        }
+        a {
+            position: relative;
+            top: 20px;
+            text-decoration: none;
+            color: #8D99AE;
+            margin: 20px;
+        }
+        a:hover {
+            color: #EF233C;
+        }
+        body {
+            font-family: "Pridi", monospace;
+            background-color: #2B2D42;
+        }
+        p {
+            color: #8D99AE;
+        }
+        button {
+            background-color: #EF233C;
+            color: #EDF2F4;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            font-family: "Pridi", monospace;
+        }
+        button:hover {
+            background-color: #D90429;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div> 
+            <h1 style="margin-top: 5%;">Bárbara Gabriela</h1>
+        </div>
+        <!-- menu principal com acesso para as áreas "sobre mim", "educação", "projetos" e "contato" -->
+        <div style="text-align: center;">
+            <a href="#sobre-mim">SOBRE MIM</a>
+            <a href="#educacao">EDUCAÇÃO</a>
+            <a href="#projetos">PROJETOS</a>
+            <a href="#contato">CONTATO</a>
+        </div>
+    </header>
+    <main>
+        <section id="sobre-mim">
+            <!-- apresentação do autor, com foto e descrição -->
+            <h1>Sobre mim</h1>
+            <img src="./images/profile.jpeg" alt="Foto" width="200" height="200" style="
+                border-radius: 100%; 
+                display: block;
+                margin-left: auto;
+                margin-right: auto;">
+            <p style="margin-left: 20%; margin-right: 20%; margin-top: 20px; margin-bottom: 20px; text-align: center;">Criativa e dinâmica ~ Nunca parei de buscar novos conhecimentos. Sempre fui apaixonada por processos industriais, desde o conceito ao produto final. Faço desenhos 3D e 2D de produtos e equipamentos, principalmente voltados para biomecânica e musculação. Minhas habilidades incluem "Programação em Python, HTML e CSS", "Análise Numérica", "Processos Industriais", "Leitura e Criação de Desenhos Técnicos" e "Mecânica dos Sólidos".</p>
+            <!-- logos dos programas que utilizo -->
+            <div class="logos" style="text-align: center;">
+                <img src="./images/logo-autocad.png" alt="Logo do Autocad" style="width: 50px; height: 50px;">
+                <img src="./images/logo-fusion.png" alt="Logo do Fusion" style="width: 50px; height: 50px;">
+            </div>
+        </section>
+        <section id="educacao">
+            <!-- lista de formação acadêmica do autor -->
+            <h1>Educação</h1>
+            <!-- card com logo da universidade, nome da universidade e nome do curso -->
+            <div>
+                <img src="./images/logo-pucminas.png" alt="Logo da PUC Minas" style="width: 10%; height: 10%; display: block; margin-left: auto; margin-right: auto;">
+                <p style="text-align: center; margin-bottom: 0%;">PUC Minas, Coração Eucarístico</p>
+                <p style="text-align: center; margin-top: 0%;">Engenharia de Controle e Automação</p>
+            </div>
+        </section>
+        <section id="projetos">
+            <h1>Projetos</h1>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+                <div style="display: flex;">
+                    <model-viewer id="inclined-bench" alt="Inclined Bench" src="./models/inclined-bench.glb" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
+                    <div>
+                        <p>Inclined Bench</p>
+                        <div class="controls">
+                            <button onclick="exportGLB_inclinedbench()">DOWNLOAD</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <model-viewer id="cable-tower" alt="Cable Tower" src="./models/cable-tower.glb" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
+                    <div>
+                        <p>Cable Tower</p>
+                        <div class="controls">
+                            <button onclick="exportGLB_cabletower()">DOWNLOAD</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <model-viewer id="hack-squat-machine" alt="Hack Squat Machine" src="./models/hack-squat-machine.glb" shadow-intensity="1" camera-controls touch-action="pan-y"></model-viewer>
+                    <div>
+                        <p>Hack Squat Machine</p>
+                        <div class="controls">
+                            <button onclick="exportGLB_hacksquatmachine()">DOWNLOAD</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> 
+    </main>
+    <footer>
+        <!-- contato -->
+        <section id="contato" style="margin-bottom: 10%;">
+            <h1>Contato</h1>
+            <p style="text-align: center;">barbaragabrielasp@gmail.com | +55 31 97236-8395</p>
+        </section>
+    </footer>
+    
+    <script>
+        async function exportGLB_inclinedbench(){
+          const modelViewer = document.getElementById("inclined-bench");
+          const glTF = await modelViewer.exportScene();
+          const file = new File([glTF], "inclined-bench.glb", {type: "model/gltf-binary"});
+          const link = document.createElement("a");
+          link.download =file.name;
+          link.href = URL.createObjectURL(file);
+          link.click();
+        }
+        async function exportGLB_cabletower(){
+          const modelViewer = document.getElementById("cable-tower");
+          const glTF = await modelViewer.exportScene();
+          const file = new File([glTF], "cable-tower.glb", {type: "model/gltf-binary"});
+          const link = document.createElement("a");
+          link.download =file.name;
+          link.href = URL.createObjectURL(file);
+          link.click();
+        }
+        async function exportGLB_hacksquatmachine(){
+          const modelViewer = document.getElementById("hack-squat-machine");
+          const glTF = await modelViewer.exportScene();
+          const file = new File([glTF], "hack-squat-machine.glb", {type: "model/gltf-binary"});
+          const link = document.createElement("a");
+          link.download =file.name;
+          link.href = URL.createObjectURL(file);
+          link.click();
+        }
+    </script>
+
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</body>
+</html>
